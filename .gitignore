@@ -1,0 +1,21 @@
+# Build artifacts
+build/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+edge_detect
+
+# Python
+.venv/
+__pycache__/
+
+# VS Code
+.vscode/
+
+# CUDA / Nsight profiling binaries
+*.nsys-rep
+*.ncu-rep
+
+# OS junk
+.DS_Store
+Thumbs.db
