@@ -11,9 +11,7 @@
 #include "../kernels/sobel_cuda_naive.hpp"
 GpuMetrics gpu_metrics;
 
-// ------------------------------------------------------------
 // Compare CPU and GPU outputs pixel-by-pixel
-// ------------------------------------------------------------
 bool compare_results(const unsigned char* cpu,
                      const unsigned char* gpu,
                      int size)
@@ -29,9 +27,7 @@ bool compare_results(const unsigned char* cpu,
     return true;
 }
 
-// ------------------------------------------------------------
 // Main
-// ------------------------------------------------------------
 int main(int argc, char** argv)
 {
     if (argc < 2) {
@@ -57,9 +53,7 @@ int main(int argc, char** argv)
     std::vector<unsigned char> cpu_out(size, 0);
     std::vector<unsigned char> gpu_out(size, 0);
 
-    // ============================================================
     // CPU Sobel — Warm-up + Averaged Timing
-    // ============================================================
     constexpr int CPU_WARMUP_RUNS   = 1;
     constexpr int CPU_MEASURED_RUNS = 5;
 
@@ -98,16 +92,12 @@ int main(int argc, char** argv)
 
     std::cout << "CPU Sobel completed\n";
 
-    // ============================================================
-    // GPU Sobel (Averaged inside CUDA code)
-    // ============================================================
+    // GPU Sobel 
     sobel_cuda_naive(img.data, gpu_out.data(),
                  width, height, gpu_metrics);
     std::cout << "CUDA Sobel completed\n";
 
-    // ============================================================
     // Save output images
-    // ============================================================
     std::filesystem::path input_path(argv[1]);
     std::string base_name = input_path.stem().string();
 
@@ -119,22 +109,17 @@ int main(int argc, char** argv)
     cv::imwrite(gpu_filename,
                 cv::Mat(height, width, CV_8UC1, gpu_out.data()));
 
-    // ============================================================
     // Validate results
-    // ============================================================
     if (compare_results(cpu_out.data(), gpu_out.data(), size))
         std::cout << "CPU and GPU outputs MATCH ✔\n";
     else
         std::cout << "CPU and GPU outputs DO NOT MATCH ❌\n";
 
-    // ============================================================
-    // Write CSV benchmark results
-    // ============================================================
+    //CSV benchmark results
     std::filesystem::create_directories("../benchmarks");
 
     std::string csv_file = "../benchmarks/cpu_gpu_comparison.csv";
 
-    // Check if file exists (to write header once)
     bool write_header = !std::filesystem::exists(csv_file);
 
     // Open CSV file ONCE
@@ -145,7 +130,6 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    // Write header if needed
     if (write_header) {
         csv << "image,width,height,"
             << "cpu_frame_ms,gpu_frame_ms,"

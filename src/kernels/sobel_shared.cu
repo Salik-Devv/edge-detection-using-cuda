@@ -11,15 +11,11 @@
 #define WARMUP_RUNS 3
 #define MEASURED_RUNS 10
 
-// ============================================================
 // Constant memory Sobel kernels
-// ============================================================
 __constant__ int d_sobel_x[9];
 __constant__ int d_sobel_y[9];
 
-// ============================================================
 // Shared-memory Sobel kernel
-// ============================================================
 __global__
 void sobel_shared_kernel(const unsigned char* input,
                          unsigned char* output,
@@ -93,9 +89,7 @@ void sobel_shared_kernel(const unsigned char* input,
     }
 }
 
-// ============================================================
-// HOST launcher — Averaged GPU benchmarking (CORRECT)
-// ============================================================
+// HOST launcher — Averaged GPU benchmarking 
 void sobel_cuda_naive(const unsigned char* h_input,
                       unsigned char* h_output,
                       int width,
