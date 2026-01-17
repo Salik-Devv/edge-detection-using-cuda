@@ -206,11 +206,6 @@ This project demonstrates:
 - Roofline modeling
 - Professional GPU profiling methodology
 
-It is suitable for:
-
-- CUDA coursework
-- MS/PhD applications
-- GPU performance engineering portfolios
 
 ---
 
