@@ -192,7 +192,7 @@ Key metrics analyzed:
 - GPU shows near-optimal occupancy and balanced compute/memory behavior
 
 Full analysis available in the report:
-📄 `Sobel_CPU_vs_GPU_CUDA_Report_Enhanced.pdf`
+📄 `Report.pdf`
 
 ---
 
